@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Album</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>My Photo Album</h1>
+    <button id="add-btn" class="btn-primary">+ Add Photo</button>
+  </header>
+
+  <main>
+    <div id="gallery" class="gallery"></div>
+    <p id="empty-msg" class="empty-msg">No photos yet. Click "Add Photo" to get started!</p>
+  </main>
+
+  <!-- Add Photo Modal -->
+  <div id="add-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Add New Photo</h2>
+      <label for="photo-url">Image URL</label>
+      <input id="photo-url" type="text" placeholder="https://example.com/photo.jpg" />
+      <label for="photo-title">Title</label>
+      <input id="photo-title" type="text" placeholder="My Photo" />
+      <label for="photo-desc">Description (optional)</label>
+      <textarea id="photo-desc" placeholder="A short description..."></textarea>
+      <div class="modal-actions">
+        <button id="cancel-btn" class="btn-secondary">Cancel</button>
+        <button id="save-btn" class="btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="modal hidden">
+    <div class="lightbox-overlay" id="lightbox-close"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close-btn" id="lightbox-close-btn">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+      <div class="lightbox-info">
+        <h3 id="lightbox-title"></h3>
+        <p id="lightbox-desc"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
