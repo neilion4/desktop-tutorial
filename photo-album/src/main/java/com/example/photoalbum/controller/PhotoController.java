@@ -2,7 +2,6 @@ package com.example.photoalbum.controller;
 
 import com.example.photoalbum.model.Photo;
 import com.example.photoalbum.service.PhotoService;
-import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -50,21 +49,20 @@ public class PhotoController {
         try {
             photoService.delete(id);
             return ResponseEntity.ok().build();
-        } catch (IOException e) {
+        } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
     }
 
     @GetMapping("/photos/{id}/image")
-    public ResponseEntity<Resource> serveImage(@PathVariable Long id) {
+    public ResponseEntity<byte[]> serveImage(@PathVariable Long id) {
         try {
             Photo photo = photoService.findById(id);
-            Resource resource = photoService.loadAsResource(photo.getFilename());
-            String contentType = photo.getContentType() != null ? photo.getContentType() : "image/jpeg";
             return ResponseEntity.ok()
-                    .contentType(MediaType.parseMediaType(contentType))
-                    .body(resource);
-        } catch (IOException e) {
+                    .contentType(MediaType.parseMediaType(
+                            photo.getContentType() != null ? photo.getContentType() : "image/jpeg"))
+                    .body(photo.getImageData());
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }

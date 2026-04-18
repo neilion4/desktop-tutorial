@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 
@@ -23,12 +25,13 @@ public class Photo {
     @Column(length = 1000)
     private String description;
 
-    @Column(nullable = false)
-    private String filename;
-
     private String originalFilename;
     private Long fileSize;
     private String contentType;
+
+    @JdbcTypeCode(SqlTypes.LONG32VARBINARY)
+    @Column(nullable = false)
+    private byte[] imageData;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
