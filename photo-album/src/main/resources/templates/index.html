@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photo Album</title>
+  <link rel="stylesheet" th:href="@{/css/styles.css}" />
+</head>
+<body>
+  <header>
+    <h1>My Photo Album</h1>
+    <button id="add-btn" class="btn-primary">+ 사진 추가</button>
+  </header>
+
+  <main>
+    <!-- 에러 메시지 -->
+    <div th:if="${error}" class="toast" th:text="${error}"></div>
+
+    <!-- 갤러리 -->
+    <div id="gallery" class="gallery">
+      <div th:each="photo : ${photos}"
+           class="photo-card"
+           th:data-src="@{/photos/{id}/image(id=${photo.id})}"
+           th:data-title="${photo.title}"
+           th:data-desc="${photo.description != null ? photo.description : ''}"
+           th:data-date="${photo.createdAt != null ? #temporals.format(photo.createdAt, 'yyyy년 MM월 dd일') : ''}">
+        <img th:src="@{/photos/{id}/image(id=${photo.id})}" th:alt="${photo.title}" />
+        <div class="photo-card-info">
+          <h3 th:text="${photo.title}"></h3>
+          <p th:text="${photo.description}"></p>
+        </div>
+        <button class="delete-btn" th:data-id="${photo.id}" title="삭제">&times;</button>
+      </div>
+    </div>
+
+    <p id="empty-msg" class="empty-msg"
+       th:unless="${#lists.size(photos) > 0}">
+      사진이 없습니다. "사진 추가" 버튼을 눌러 시작하세요!
+    </p>
+  </main>
+
+  <!-- 사진 추가 모달 -->
+  <div id="add-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>사진 추가</h2>
+      <form id="upload-form" th:action="@{/photos}" method="post" enctype="multipart/form-data">
+        <div id="drop-zone" class="drop-zone">
+          <input id="file-input" type="file" name="file" accept="image/*" hidden />
+          <div class="drop-zone-inner">
+            <span class="drop-icon">📁</span>
+            <p>클릭하거나 이미지를 드래그하세요</p>
+            <p class="drop-hint">JPG, PNG, GIF, WEBP 지원 (최대 20MB)</p>
+          </div>
+        </div>
+        <div id="preview-wrap" class="preview-wrap hidden">
+          <img id="preview-img" src="" alt="미리보기" />
+          <button type="button" id="preview-remove" class="preview-remove">다시 선택</button>
+        </div>
+        <label for="photo-title">제목</label>
+        <input id="photo-title" name="title" type="text" placeholder="사진 제목" />
+        <label for="photo-desc">설명 (선택)</label>
+        <textarea id="photo-desc" name="description" placeholder="간단한 설명..."></textarea>
+        <div class="modal-actions">
+          <button type="button" id="cancel-btn" class="btn-secondary">취소</button>
+          <button type="submit" id="save-btn" class="btn-primary">저장</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 삭제 확인 모달 -->
+  <div id="confirm-modal" class="modal hidden">
+    <div class="modal-content modal-confirm">
+      <h2>사진 삭제</h2>
+      <p>이 사진을 삭제하시겠습니까?</p>
+      <div class="modal-actions">
+        <button id="confirm-cancel" class="btn-secondary">취소</button>
+        <button id="confirm-delete" class="btn-danger">삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 라이트박스 -->
+  <div id="lightbox" class="modal hidden">
+    <div class="lightbox-overlay" id="lightbox-close"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close-btn" id="lightbox-close-btn">&times;</button>
+      <img id="lightbox-img" src="" alt="" />
+      <div class="lightbox-info">
+        <h3 id="lightbox-title"></h3>
+        <p id="lightbox-desc"></p>
+        <span id="lightbox-date" class="lightbox-date"></span>
+      </div>
+    </div>
+  </div>
+
+  <script th:src="@{/js/app.js}"></script>
+</body>
+</html>

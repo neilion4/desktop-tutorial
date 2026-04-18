@@ -1,0 +1,12 @@
+target/
+uploads/
+data/
+*.class
+*.jar
+*.war
+.idea/
+*.iml
+.settings/
+.classpath
+.project
+.DS_Store

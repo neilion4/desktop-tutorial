@@ -11,7 +11,6 @@ body {
   min-height: 100vh;
 }
 
-/* Header */
 header {
   display: flex;
   align-items: center;
@@ -28,10 +27,8 @@ header h1 {
   font-size: 1.8rem;
   font-weight: 700;
   color: #2c3e50;
-  letter-spacing: -0.5px;
 }
 
-/* Buttons */
 .btn-primary {
   background: #3b82f6;
   color: #fff;
@@ -71,11 +68,20 @@ header h1 {
 }
 .btn-danger:hover { background: #dc2626; }
 
-/* Main / Gallery */
 main {
   padding: 40px;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.toast {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
 }
 
 .gallery {
@@ -150,7 +156,6 @@ main {
   margin-top: 80px;
 }
 
-/* Modal */
 .modal {
   position: fixed;
   inset: 0;
@@ -175,11 +180,8 @@ main {
   max-height: 90vh;
   overflow-y: auto;
 }
-.modal-content h2 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
+.modal-content h2 { font-size: 1.3rem; font-weight: 700; }
+.modal-content form { display: flex; flex-direction: column; gap: 12px; }
 .modal-content label {
   font-size: 0.85rem;
   font-weight: 600;
@@ -208,45 +210,9 @@ main {
   margin-top: 6px;
 }
 
-/* Confirm Modal */
-.modal-confirm {
-  max-width: 360px;
-  text-align: center;
-}
-.modal-confirm p {
-  color: #6b7280;
-  font-size: 0.95rem;
-  margin-top: -4px;
-}
+.modal-confirm { max-width: 360px; text-align: center; }
+.modal-confirm p { color: #6b7280; font-size: 0.95rem; }
 
-/* Tabs */
-.tabs {
-  display: flex;
-  border-bottom: 2px solid #e5e7eb;
-  margin-bottom: 4px;
-}
-.tab {
-  background: none;
-  border: none;
-  padding: 8px 18px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #9ca3af;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  transition: color 0.2s, border-color 0.2s;
-}
-.tab.active {
-  color: #3b82f6;
-  border-bottom-color: #3b82f6;
-}
-.tab:hover { color: #374151; }
-
-.tab-panel { display: flex; flex-direction: column; gap: 8px; }
-.tab-panel.hidden { display: none; }
-
-/* Drop Zone */
 .drop-zone {
   border: 2px dashed #d1d5db;
   border-radius: 10px;
@@ -265,7 +231,6 @@ main {
 .drop-zone p { font-size: 0.9rem; color: #374151; font-weight: 500; }
 .drop-hint { font-size: 0.8rem !important; color: #9ca3af !important; margin-top: 4px; }
 
-/* Preview */
 .preview-wrap {
   display: flex;
   flex-direction: column;
@@ -293,9 +258,7 @@ main {
 }
 .preview-remove:hover { border-color: #ef4444; color: #ef4444; }
 
-/* Lightbox */
 .lightbox-overlay { position: absolute; inset: 0; }
-
 .lightbox-content {
   position: relative;
   background: #fff;
