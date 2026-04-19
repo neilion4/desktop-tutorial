@@ -44,6 +44,7 @@ public class PhotoController {
         return "redirect:/";
     }
 
+    @ResponseBody
     @DeleteMapping("/photos/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         try {
@@ -54,6 +55,7 @@ public class PhotoController {
         }
     }
 
+    @ResponseBody
     @GetMapping("/photos/{id}/image")
     public ResponseEntity<byte[]> serveImage(@PathVariable Long id) {
         try {
