@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +10,14 @@
 <body>
   <header>
     <h1>My Photo Album</h1>
-    <button id="add-btn" class="btn-primary">+ 사진 추가</button>
+    <div style="display:flex; align-items:center; gap:0.75rem;">
+      <span sec:authentication="name" style="font-size:0.95rem;"></span>
+      <form th:action="@{/logout}" method="post" style="display:inline">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <button type="submit" class="btn-secondary">로그아웃</button>
+      </form>
+      <button id="add-btn" class="btn-primary">+ 사진 추가</button>
+    </div>
   </header>
 
   <main>
