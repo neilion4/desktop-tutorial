@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.client.registration.InMemoryClientReg
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
-import org.springframework.security.oauth2.client.registration.CommonOAuth2Provider;
+import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
 
 import java.util.ArrayList;
 import java.util.List;
